@@ -2,6 +2,7 @@
 Erdos Data Science Boot Camp project
 
 **Team member**
+
 Tong Shan, Dushyanth Sirivolu, Fulya Tastan, Philip Barron, Larsen Linov, Ming Li
 ## Project Description
 Multimodal biosignal was recorded in this dataset, including electrocardiography (ECG), electrodermal activity (EDA), and photoplethysmography (PPG). They also recorded bicep electromyography (EMG), wrist temperature (TEMP) and chest and wrist actigraphy (ACC). Our goal is to study the biosignal pattern of everyday activity like walking, running, lifting chairs, etc. And then come up with a model to monitor and predict the activity.

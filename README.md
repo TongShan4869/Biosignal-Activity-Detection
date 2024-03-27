@@ -28,6 +28,7 @@ Areias Saraiva, J., Abreu, M., Carmo, A. S., Plácido da Silva, H., & Fred, A. (
   - Confusion matrix
   - Accuracy
   - Macro- / micro-averaged evaluation metrics
+- Feature importance
 - Number of models developed
 - Model consistency/robustness
 - Model generalizability

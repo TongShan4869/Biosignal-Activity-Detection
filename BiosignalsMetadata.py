@@ -1,9 +1,25 @@
 
-# Participant codes
+
+
+### Universal variables ###
+
+sampling_rate = 500
+
+
+### Participant codes ###
 
 participants = ['03FH', '3B8D', '3RFH', '4JF9', '93DK', '93JD', 'AP3H', 'F408', 'H39D', 'JD3K', 'K2Q2', 'KF93', 'KS03', 'LAS2', 'LDM5', 'LK27', 'ME93']
 
-# Devices
+def part_to_path(participant):
+    return 'CSVs/' + participant + '.csv'
+
+
+### Columns in the CSVs ###
+
+columns = ['ecg:dry', 'ecg:gel', 'eda:dry', 'eda:gel', 'emg:Left Bicep', 'temp:temp', 'ppg:Left index finger', 'ppg:Left Wrist', 'acc_e4:z', 'acc_e4:x', 'acc_e4:y', 'acc_chest:x', 'acc_chest:y', 'acc_chest:z']
+
+
+### Devices ###
 
 devices = ['ScientISST Chest', 'ScientISST Forearm', 'Empatica E4']
 
@@ -29,6 +45,15 @@ device_to_cols = {
     'ScientISST Forearm': ['eda:gel', 'emg:Left Bicep', 'ppg:Left index finger'],
     'Empatica E4': ['eda:dry', 'temp:temp', 'ppg:Left Wrist', 'acc_e4:z', 'acc_e4:x', 'acc_e4:y']
 }
+
+
+### Utility functions ###
+
+def pair_to_range(pair):
+    return range(pair[0], pair[1])
+
+
+### Measurement ranges ###
 
 measurement_ranges = {
 	'ScientISST Chest': {
@@ -84,8 +109,177 @@ measurement_ranges = {
 		'LAS2': [(0, 1289250), (1361500, 1727500)],
 		'LDM5': [(0, 1847250)],
 		'LK27': [(0, 1950000)],
-		'ME93': [(0, 568500)]
-	}
+		'ME93': [(0, 568500)]}
+}
+
+
+### Activities ###
+
+activities = {
+    '03FH': ['(blank)', 'baseline,', 'run,', 'walk_after,'],
+    '3B8D': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    '3RFH': ['baseline,', '(blank)', 'lift,', 'greetings,', 'gesticulate,', 'jumps,', 'walk_before,', 'run,', 'walk_after,'],
+    '4JF9': ['baseline,', '(blank)', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'run,walk_after,'],           # all 'walk_after' is also 'run'
+    '93DK': ['baseline,', '(blank)', 'lift,', 'greetings,', 'jumps,', 'walk_before,', 'run,', 'walk_after,'],
+    '93JD': ['baseline,', '(blank)', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'AP3H': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before_downstairs,', 'run,', 'walk_after,'],
+    'F408': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'H39D': ['baseline,', '(blank)', 'lift,', 'walk_before,', 'run,', 'sprint,run,', 'walk_after,'],                              # all 'sprint' is also 'run'
+    'JD3K': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'K2Q2': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'walk_before_downstairs,', 'walk_before,', 'run,', 'walk_after,'],
+    'KF93': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'KS03': ['(blank)', 'baseline,', 'walk_before,', 'walk_before_downstairs,', 'gesticulate,', 'walk_before_elevatorup,', 'greetings,', 'lift,'],
+    'LAS2': ['(blank)', 'lift-1,', 'lift-2,', 'greetings,', 'jumps,', 'gesticulate,', 'walk_before_elevatordown,', 'walk_before,', 'run,'],
+    'LDM5': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'LK27': ['(blank)', 'baseline,', 'lift,', 'greetings,', 'gesticulate,', 'walk_before,', 'run,', 'walk_after,'],
+    'ME93': ['(blank)', 'run,']
+}
+
+activity_ranges = {
+    '03FH': {
+        '(blank)': [(0, 138582), (143182, 189205), (1087000, 1189468)],
+        'baseline,': [(138582, 143182)],
+        'run,': [(189205, 856030)],
+        'walk_after,': [(856030, 1087000)]},
+    '3B8D': {
+        '(blank)': [(0, 16880), (49480, 303335), (331622, 350665), (373144, 393805), (445238, 470212), (622512, 643735), (1750364, 1906007)],
+        'baseline,': [(16880, 49480)],
+        'lift,': [(303335, 331622)],
+        'greetings,': [(350665, 373144)],
+        'gesticulate,': [(393805, 445238)],
+        'walk_before,': [(470212, 622512)],
+        'run,': [(643735, 1585775)],
+        'walk_after,': [(1585775, 1750364)]},
+    '3RFH': {
+        'baseline,': [(0, 326363)],
+        '(blank)': [(326363, 526536), (587139, 653202), (674785, 704082), (824028, 1002136), (1034238, 1141052), (1243371, 1297062), (2383690, 2504638)],
+        'lift,': [(526536, 587139)],
+        'greetings,': [(653202, 674785)],
+        'gesticulate,': [(704082, 824028)],
+        'jumps,': [(1002136, 1034238)],
+        'walk_before,': [(1141052, 1243371)],
+        'run,': [(1297062, 2278956)],
+        'walk_after,': [(2278956, 2383690)]},
+    '4JF9': {
+        'baseline,': [(0, 51000)],
+        '(blank)': [(51000, 123567), (156418, 206232), (239820, 309512), (363805, 411857), (471106, 561612)],
+        'lift,': [(123567, 156418)],
+        'greetings,': [(206232, 239820)],
+        'gesticulate,': [(309512, 363805)],
+        'walk_before,': [(411857, 471106)],
+        'run,': [(561612, 1998777), (2047277, 2047347)],            # very short second period
+        'run,walk_after,': [(1998777, 2047277)]},
+    '93DK': {
+        'baseline,': [(0, 75400)],
+        '(blank)': [(75400, 158313), (182043, 212963), (239180, 266038), (287965, 396518), (429211, 491048), (1544438, 1556688)],
+        'lift,': [(158313, 182043)],
+        'greetings,': [(212963, 239180)],
+        'jumps,': [(266038, 287965)],
+        'walk_before,': [(396518, 429211)],
+        'run,': [(491048, 1372700)],
+        'walk_after,': [(1372700, 1544438)]},
+    '93JD': {
+        'baseline,': [(0, 46500)],
+        '(blank)': [(46500, 195391), (268191, 278950), (302650, 324463), (366963, 406116), (541716, 565575), (1258324, 1267980), (1387580, 1663749)],
+        'lift,': [(195391, 268191)],
+        'greetings,': [(278950, 302650)],
+        'gesticulate,': [(324463, 366963)],
+        'walk_before,': [(406116, 541716)],
+        'run,': [(565575, 1258324)],
+        'walk_after,': [(1267980, 1387580)]},
+    'AP3H': {
+        '(blank)': [(0, 2344), (131544, 339760), (371176, 399300), (425896, 454144), (494828, 595600), (642800, 663050), (1716582, 1728471)],
+        'baseline,': [(2344, 131544)],
+        'lift,': [(339760, 371176)],
+        'greetings,': [(399300, 425896)],
+        'gesticulate,': [(454144, 494828)],
+        'walk_before_downstairs,': [(595600, 642800)],
+        'run,': [(663050, 1672450)],
+        'walk_after,': [(1672450, 1716582)]},
+    'F408': {
+        '(blank)': [(0, 870), (19770, 95076), (127723, 144756), (164782, 179826), (230166, 250186), (315826, 408840), (1406270, 1406567)],
+        'baseline,': [(870, 19770)],
+        'lift,': [(95076, 127723)],
+        'greetings,': [(144756, 164782)],
+        'gesticulate,': [(179826, 230166)],
+        'walk_before,': [(250186, 315826)],
+        'run,': [(408840, 1174270)],
+        'walk_after,': [(1174270, 1406270)]},
+    'H39D': {
+        'baseline,': [(0, 24000)],
+        '(blank)': [(24000, 39142), (69042, 277516), (306816, 320396), (3876396, 3886594), (3931994, 4694665)],
+        'lift,': [(39142, 69042)],
+        'walk_before,': [(277516, 306816)],
+        'run,': [(320396, 968748), (1323790, 3876396)],
+        'sprint,run,': [(968748, 1323790)],
+        'walk_after,': [(3886594, 3931994)]},
+    'JD3K': {
+        '(blank)': [(0, 15910), (37710, 64865), (113684, 127260), (143232, 163155), (197292, 224180), (358014, 446390), (1525000, 1528125)],
+        'baseline,': [(15910, 37710)],
+        'lift,': [(64865, 113684)],
+        'greetings,': [(127260, 143232)],
+        'gesticulate,': [(163155, 197292)],
+        'walk_before,': [(224180, 358014)],
+        'run,': [(446390, 1421930)],
+        'walk_after,': [(1421930, 1525000)]},
+    'K2Q2': {
+        '(blank)': [(0, 136721), (183221, 201513), (235213, 272998), (318098, 400658), (424858, 461056), (578556, 684160), (966860, 981362), (1426762, 2022796)],
+        'baseline,': [(136721, 183221)],
+        'lift,': [(201513, 235213)],
+        'greetings,': [(272998, 318098)],
+        'walk_before_downstairs,': [(400658, 424858)],
+        'walk_before,': [(461056, 578556)],
+        'run,': [(684160, 966860)],
+        'walk_after,': [(981362, 1426762)]},
+    'KF93': {
+        '(blank)': [(0, 47637), (136437, 173955), (214677, 233400), (249122, 271045), (334728, 401705), (516644, 546155), (1594915, 1638484)],
+        'baseline,': [(47637, 136437)],
+        'lift,': [(173955, 214677)],
+        'greetings,': [(233400, 249122)],
+        'gesticulate,': [(271045, 334728)],
+        'walk_before,': [(401705, 516644)],
+        'run,': [(546155, 1551540)],
+        'walk_after,': [(1551540, 1594915)]},
+    'KS03': {
+        '(blank)': [(0, 1031), (36231, 240181), (295792, 366336), (470083, 512571), (652468, 674186), (724955, 938861), (971175, 1014671), (1055926, 1232703)],
+        'baseline,': [(1031, 36231)],
+        'walk_before,': [(240181, 295792)],
+        'walk_before_downstairs,': [(366336, 470083)],
+        'gesticulate,': [(512571, 652468)],
+        'walk_before_elevatorup,': [(674186, 724955)],
+        'greetings,': [(938861, 971175)],
+        'lift,': [(1014671, 1055926)]},
+    'LAS2': {
+        '(blank)': [(0, 35210), (55108, 145045), (171538, 187375), (220568, 241150), (279022, 511915), (1704778, 1727679)],
+        'lift-1,': [(35210, 55108)],
+        'lift-2,': [(145045, 171538)],
+        'greetings,': [(187375, 206595)],
+        'jumps,': [(206595, 220568)],
+        'gesticulate,': [(241150, 279022)],
+        'walk_before_elevatordown,': [(511915, 567536)],
+        'walk_before,': [(567536, 849500)],
+        'run,': [(849500, 1704778)]},
+    'LDM5': {
+        '(blank)': [(0, 53556), (82256, 199320), (229628, 244305), (264106, 297330), (348678, 448150), (565236, 598455), (1847000, 1847570)],
+        'baseline,': [(53556, 82256)],
+        'lift,': [(199320, 229628)],
+        'greetings,': [(244305, 264106)],
+        'gesticulate,': [(297330, 348678)],
+        'walk_before,': [(448150, 565236)],
+        'run,': [(598455, 1779500)],
+        'walk_after,': [(1779500, 1847000)]},
+    'LK27': {
+        '(blank)': [(0, 39140), (119240, 352810), (403976, 429025), (449188, 475560), (527121, 566440), (727792, 746000), (1758142, 1763540), (1893464, 1950093)],
+        'baseline,': [(39140, 119240)],
+        'lift,': [(352810, 403976)],
+        'greetings,': [(429025, 449188)],
+        'gesticulate,': [(475560, 527121)],
+        'walk_before,': [(566440, 727792)],
+        'run,': [(746000, 1758142)],
+        'walk_after,': [(1763540, 1893464)]},
+    'ME93': {
+        '(blank)': [(0, 43725), (541000, 568593)],
+        'run,': [(43725, 541000)]}
 }
 
 

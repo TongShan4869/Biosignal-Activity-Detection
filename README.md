@@ -40,6 +40,9 @@ The models all did well on classification on the test set, here are the log loss
 
 **Confusion Matrix of XGBoost Classifier**
 
+<img width="660" alt="image1" src="https://github.com/TongShan4869/Biosignal-Activity-Detection/assets/51421789/38c60258-61a6-4ded-a877-48512714c861">
+
+
 It is also found that the most important features in recognizing human activities come from the Acceleration (ACC) biosignal.
 
 ## Application

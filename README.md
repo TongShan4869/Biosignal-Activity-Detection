@@ -21,7 +21,7 @@ Our goal is to study the biosignal pattern of everyday activity like walking, ru
 ## Data processing
 - Timepoints where the signal was missing or obviously incorrect were excluded.
 - Continuous biosignal from each activity period in each subject was segmented into 10-second segments [`signal_segmentation.py`](https://github.com/TongShan4869/Biosignal-Activity-Detection/blob/main/signal_segmentation.py)
-- Features from time domain, frequency domain and statistical metrics were extracted using existing packages ([BIOBSS](https://github.com/obss/BIOBSS), [BioSPPy](https://biosppy.readthedocs.io/en/stable/), [Neurokit2](https://github.com/neuropsychology/NeuroKit)) and custom functions.[`dataset_feature_extraction.py`](https://github.com/TongShan4869/Biosignal-Activity-Detection/blob/main/dataset_feature_extraction.py)
+- Features from time domain, frequency domain and statistical metrics were extracted using existing packages ([BIOBSS](https://github.com/obss/BIOBSS), [BioSPPy](https://biosppy.readthedocs.io/en/stable/), [Neurokit2](https://github.com/neuropsychology/NeuroKit)) and custom functions [`dataset_feature_extraction.py`](https://github.com/TongShan4869/Biosignal-Activity-Detection/blob/main/dataset_feature_extraction.py)
 ## Activity Classification ML Models [`./models`](https://github.com/TongShan4869/Biosignal-Activity-Detection/tree/main/models)
 Hyperparameters were optimized through grid search by cross-validation in training set
 - Random forest 

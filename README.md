@@ -28,7 +28,7 @@ Hyperparameters were optimized through grid search by cross-validation in traini
 - Support vector machine (SVM)
 - Logistic/softmax regression
 - XGBoost
-## Key resutls
+## Key results
 The models all did well on classification on the test set, here are the log loss scores of each model and the confusion matrix from XGBoostClassifier. 
 
 | Algorithms      | Log Loss Score |

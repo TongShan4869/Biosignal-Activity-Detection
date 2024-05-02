@@ -34,7 +34,7 @@ The models all did well on classification on the test set, here are the log loss
 | Algorithms      | Log Loss Score |
 | ----------- | ----------- |
 | Logistic/SoftMax Regression      | 0.1263       |
-| Support Vevtor Machine   | 0.1165        |
+| Support Vector Machine   | 0.1165        |
 | Random Forest Classifier   | 0.1399        |
 | XGBoost Classifier   | 0.0677       |
 
